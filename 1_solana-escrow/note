@@ -1,0 +1,134 @@
+colin@mgs:~/Desktop/self/SOL/test/Solana-training/1_solana-escrow$  cargo build-bpf
+BPF SDK: /home/colin/.local/share/solana/install/releases/1.8.5/solana-release/bin/sdk/bpf
+cargo-build-bpf child: rustup toolchain list -v
+cargo-build-bpf child: cargo +bpf build --target bpfel-unknown-unknown --release
+   Compiling proc-macro2 v1.0.32
+   Compiling unicode-xid v0.2.2
+   Compiling syn v1.0.82
+   Compiling serde_derive v1.0.130
+   Compiling serde v1.0.130
+   Compiling semver-parser v0.7.0
+   Compiling typenum v1.14.0
+   Compiling version_check v0.9.3
+   Compiling block-padding v0.2.1
+   Compiling feature-probe v0.1.1
+   Compiling opaque-debug v0.3.0
+   Compiling log v0.4.14
+   Compiling rustversion v1.0.5
+   Compiling cfg-if v1.0.0
+   Compiling autocfg v1.0.1
+   Compiling ahash v0.4.7
+   Compiling bs58 v0.3.1
+   Compiling keccak v0.1.0
+   Compiling either v1.6.1
+   Compiling hex v0.4.3
+   Compiling lazy_static v1.4.0
+   Compiling arrayref v0.3.6
+   Compiling semver v0.9.0
+   Compiling generic-array v0.14.4
+   Compiling bv v0.11.1
+   Compiling hashbrown v0.9.1
+   Compiling itertools v0.9.0
+   Compiling num-traits v0.2.14
+   Compiling rustc_version v0.2.3
+   Compiling quote v1.0.10
+   Compiling solana-frozen-abi-macro v1.8.6
+   Compiling solana-frozen-abi v1.8.6
+   Compiling solana-program v1.8.6
+   Compiling borsh-derive-internal v0.9.1
+   Compiling borsh-schema-derive-internal v0.9.1
+   Compiling thiserror-impl v1.0.30
+   Compiling bytemuck_derive v1.0.1
+   Compiling solana-sdk-macro v1.8.6
+   Compiling derivative v2.2.0
+   Compiling num-derive v0.3.3
+   Compiling bytemuck v1.7.2
+   Compiling thiserror v1.0.30
+   Compiling serde_bytes v0.11.5
+   Compiling bincode v1.3.3
+   Compiling toml v0.5.8
+   Compiling block-buffer v0.9.0
+   Compiling digest v0.9.0
+   Compiling sha2 v0.9.8
+   Compiling sha3 v0.9.1
+   Compiling proc-macro-crate v0.1.5
+   Compiling proc-macro-crate v1.1.0
+   Compiling borsh-derive v0.9.1
+   Compiling num_enum_derive v0.5.4
+   Compiling borsh v0.9.1
+   Compiling num_enum v0.5.4
+   Compiling spl-token v3.2.0
+   Compiling solana-escrow v0.1.0 (/home/colin/Desktop/self/SOL/test/Solana-training/1_solana-escrow)
+    Finished release [optimized] target(s) in 25.39s
+cargo-build-bpf child: /home/colin/.local/share/solana/install/releases/1.8.5/solana-release/bin/sdk/bpf/scripts/strip.sh /home/colin/Desktop/self/SOL/test/Solana-training/1_solana-escrow/target/bpfel-unknown-unknown/release/solana_escrow.so /home/colin/Desktop/self/SOL/test/Solana-training/1_solana-escrow/target/deploy/solana_escrow.so
+cargo-build-bpf child: /home/colin/.local/share/solana/install/releases/1.8.5/solana-release/bin/sdk/bpf/dependencies/bpf-tools/llvm/bin/llvm-readelf --dyn-symbols /home/colin/Desktop/self/SOL/test/Solana-training/1_solana-escrow/target/deploy/solana_escrow.so
+
+To deploy this program:
+  $ solana program deploy /home/colin/Desktop/self/SOL/test/Solana-training/1_solana-escrow/target/deploy/solana_escrow.so
+The program address will default to this keypair (override with --program-id):
+  /home/colin/Desktop/self/SOL/test/Solana-training/1_solana-escrow/target/deploy/solana_escrow-keypair.json
+colin@mgs:~/Desktop/self/SOL/test/Solana-training/1_solana-escrow$ solana program deploy /home/colin/Desktop/self/SOL/test/Solana-training/1_solana-escrow/target/deploy/solana_escrow.so
+Program Id: GFJ1WMDuDBzHFmjASef6iakpvkHV6z7UboakKHukXveF
+
+colin@mgs:~/Desktop/self/SOL/test/Solana-training/1_solana-escrow$ l
+Cargo.lock  Cargo.toml  keys/  node_modules/  package.json  package-lock.json  src/  tags  target/  terms.json  test-ledger/  ts/  tsconfig.json
+colin@mgs:~/Desktop/self/SOL/test/Solana-training/1_solana-escrow$ vi
+Cargo.lock         keys/              package.json       src/               target/            test-ledger/       tsconfig.json
+Cargo.toml         node_modules/      package-lock.json  tags               terms.json         ts/
+colin@mgs:~/Desktop/self/SOL/test/Solana-training/1_solana-escrow$ key
+keyring  keytool
+colin@mgs:~/Desktop/self/SOL/test/Solana-training/1_solana-escrow$ vi keys/program_pub.json
+colin@mgs:~/Desktop/self/SOL/test/Solana-training/1_solana-escrow$ cat terms.json
+{
+  "aliceExpectedAmount": 3,
+  "bobExpectedAmount": 5
+}
+colin@mgs:~/Desktop/self/SOL/test/Solana-training/1_solana-escrow$ solana transfer GFJ1WMDuDBzHFmjASef6iakpvkHV6z7UboakKHukXveF 100 --allow-unfunded-recipient
+Error: RPC response error -32002: Transaction simulation failed: Transaction loads a writable account that cannot be written
+colin@mgs:~/Desktop/self/SOL/test/Solana-training/1_solana-escrow$ cat keys/id_pub.json
+"B1uZjwFeK26YuqpgAuguXr4bLuitZP1FZNzAGkBgWmcQ"
+colin@mgs:~/Desktop/self/SOL/test/Solana-training/1_solana-escrow$ vi keys/program_pub.json
+colin@mgs:~/Desktop/self/SOL/test/Solana-training/1_solana-escrow$ solana transfer B1uZjwFeK26YuqpgAuguXr4bLuitZP1FZNzAGkBgWmcQ 100 --allow-unfunded-recipient
+
+Signature: 61cTTvJTcdC3nL1r18y3k6HuHQQQ9B5u8iB3Rfkd9DnKo12G7Qteszcpxb8X7YG8oAb6qQcPqw9KZKYCCFvAgS4M
+
+colin@mgs:~/Desktop/self/SOL/test/Solana-training/1_solana-escrow$ ts-node ts/setup.ts
+Requesting SOL for Alice...
+Requesting SOL for Bob...
+Requesting SOL for Client...
+Creating Mint X...
+Creating Alice TokenAccount for X...
+Creating Bob TokenAccount for X...
+Sending 50X to Alice's X TokenAccount...
+Creating Mint Y...
+Creating Alice TokenAccount for Y...
+Creating Bob TokenAccount for Y...
+Sending 50Y to Bob's Y TokenAccount...
+✨Setup complete✨
+
+┌─────────┬───────────────────────┬───────────────────────┬─────────────────────┬─────────────────────┐
+│ (index) │ Alice Token Account X │ Alice Token Account Y │ Bob Token Account X │ Bob Token Account Y │
+├─────────┼───────────────────────┼───────────────────────┼─────────────────────┼─────────────────────┤
+│    0    │          50           │           0           │          0          │         50          │
+└─────────┴───────────────────────┴───────────────────────┴─────────────────────┴─────────────────────┘
+
+colin@mgs:~/Desktop/self/SOL/test/Solana-training/1_solana-escrow$ ts-node ts/alice.ts
+Sending Alice's transaction...
+Transaction simulation failed: This program may not be used for executing instructions
+
+/home/colin/Desktop/self/SOL/test/Solana-training/1_solana-escrow/node_modules/@solana/web3.js/src/connection.ts:3689
+      throw new SendTransactionError(
+            ^
+SendTransactionError: failed to send transaction: Transaction simulation failed: This program may not be used for executing instructions
+    at Connection.sendEncodedTransaction (/home/colin/Desktop/self/SOL/test/Solana-training/1_solana-escrow/node_modules/@solana/web3.js/src/connection.ts:3689:13)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async Connection.sendRawTransaction (/home/colin/Desktop/self/SOL/test/Solana-training/1_solana-escrow/node_modules/@solana/web3.js/src/connection.ts:3649:20)
+    at async Connection.sendTransaction (/home/colin/Desktop/self/SOL/test/Solana-training/1_solana-escrow/node_modules/@solana/web3.js/src/connection.ts:3637:12) {
+  logs: []
+}
+colin@mgs:~/Desktop/self/SOL/test/Solana-training/1_solana-escrow$ solana address -k keys/id.json
+B1uZjwFeK26YuqpgAuguXr4bLuitZP1FZNzAGkBgWmcQ
+colin@mgs:~/Desktop/self/SOL/test/Solana-training/1_solana-escrow/keys$ solana address -k alice.json
+2A5WpYqpKCHCao68CHDhJU7nqyPB7WvWKKjepdS7JPfgx
+colin@mgs:~/Desktop/self/SOL/test/Solana-training/1_solana-escrow/keys$ cat alice_pub.json
+"2A5WpYqpKCHCao68CHDhJU7nqyPB7WvWKKjepdS7JPfg"
