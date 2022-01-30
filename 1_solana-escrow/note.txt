@@ -1,3 +1,30 @@
+============================================================================================
+Issue 1:
+after cloning this project, alice.ts failed to send transactions
+============================================================================================
+Solution :
+re-generate these keys to solve it
+$ touch keys/id_pub.json
+$ touch keys/alice_pub.json
+$ touch keys/bob_pub.json
+$ touch keys/program_pub.json
+
+============================================================================================
+Suscess log snippet:
+
+n@mgs:~/Desktop/self/SOL/test/Solana-training/1_solana-escrow$ ts-node ts/bob.ts
+Sending Bob's transaction...
+✨Trade successfully executed. All temporary accounts closed✨
+
+┌─────────┬───────────────────────┬───────────────────────┬─────────────────────┬─────────────────────┐
+│ (index) │ Alice Token Account X │ Alice Token Account Y │ Bob Token Account X │ Bob Token Account Y │
+├─────────┼───────────────────────┼───────────────────────┼─────────────────────┼─────────────────────┤
+│    0    │          45           │           3           │          5          │         47          │
+└─────────┴───────────────────────┴───────────────────────┴─────────────────────┴─────────────────────┘
+
+============================================================================================
+Full issue error log:
+
 colin@mgs:~/Desktop/self/SOL/test/Solana-training/1_solana-escrow$  cargo build-bpf
 BPF SDK: /home/colin/.local/share/solana/install/releases/1.8.5/solana-release/bin/sdk/bpf
 cargo-build-bpf child: rustup toolchain list -v
