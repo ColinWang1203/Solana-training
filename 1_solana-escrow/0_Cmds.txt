@@ -1,0 +1,35 @@
+=======================================================================================
+Goal:
+
+interacte with solana escrow program
+
+=======================================================================================
+Commands:
+
+rm -r keys/
+touch keys/id_pub.json
+touch keys/alice_pub.json
+touch keys/bob_pub.json
+touch keys/program_pub.json
+solana-keygen new -o keys/id.json
+solana-keygen new -o keys/alice.json
+solana-keygen new -o keys/bob.json
+solana address -k keys/id.json
+# put the result in id_pub.json
+solana address -k keys/alice.json
+# put the result in alice_pub.json
+solana address -k keys/bob.json
+# put the result in bob_pub.json
+
+#open another shell and "solana-test-validator"
+cargo build-bpf
+solana program deploy target/deploy/solana_escrow.so
+# put the program id in the program_pub.json
+solana transfer <address in id_pub.json> 100 --allow-unfunded-recipient
+
+#test the interaction
+ts-node ts/setup.ts
+ts-node ts/alice.ts
+ts-node ts/bob.ts
+
+=======================================================================================
