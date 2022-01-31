@@ -1,0 +1,72 @@
+=======================================================================================
+Issue 2: (20220131)
+
+=======================================================================================
+Steps to reproduce:
+anchor deploy
+=======================================================================================
+Solution:
+
+=======================================================================================
+Suscess log snippet:
+
+=======================================================================================
+Full issue error log:
+
+colin@mgs:~/Desktop/self/SOL/anchor/examples/anchor-escrow$ anchor deploy
+Deploying workspace: https://rpc-mainnet-fork.dappio.xyz
+Upgrade authority: /home/colin/.config/solana/id.json
+Deploying program "anchor-escrow"...
+Program path: /home/colin/Desktop/self/SOL/anchor/examples/anchor-escrow/target/deploy/anchor_escrow.so...
+===========================================================================
+Recover the intermediate account's ephemeral keypair file with
+`solana-keygen recover` and the following 12-word seed phrase:
+===========================================================================
+liar lucky absurd boat region link reveal spot rocket salute giggle unhappy
+===========================================================================
+To resume a deploy, pass the recovered keypair as the
+[BUFFER_SIGNER] to `solana program deploy` or `solana write-buffer'.
+Or to recover the account's lamports, pass it as the
+[BUFFER_ACCOUNT_ADDRESS] argument to `solana program close`.
+===========================================================================
+Error: Pubsub error: ConnectionError(Http(405))
+There was a problem deploying: Output { status: ExitStatus(ExitStatus(256)), stdout: "", stderr: "" }.
+=======================================================================================
+=======================================================================================
+=======================================================================================
+Issue 1: (20220131)
+account in https://rpc-mainnet-fork.dappio.xyz has insufficient fund
+=======================================================================================
+Steps to reproduce:
+anchor deploy
+=======================================================================================
+Solution :
+solana config set --url https://rpc-mainnet-fork.dappio.xyz
+solana airdrop 100
+=======================================================================================
+Suscess log snippet:
+produce Issue 2
+=======================================================================================
+Full issue error log:
+
+colin@mgs:~/Desktop/self/SOL/anchor/examples/anchor-escrow$ anchor deploy
+Deploying workspace: https://rpc-mainnet-fork.dappio.xyz
+Upgrade authority: /home/colin/.config/solana/id.json
+Deploying program "anchor-escrow"...
+Program path: /home/colin/Desktop/self/SOL/anchor/examples/anchor-escrow/target/deploy/anchor_escrow.so...
+=======================================================================
+Recover the intermediate account's ephemeral keypair file with
+`solana-keygen recover` and the following 12-word seed phrase:
+=======================================================================
+kind list park fish explain grocery toy put index embrace boring vacuum
+=======================================================================
+To resume a deploy, pass the recovered keypair as the
+[BUFFER_SIGNER] to `solana program deploy` or `solana write-buffer'.
+Or to recover the account's lamports, pass it as the
+[BUFFER_ACCOUNT_ADDRESS] argument to `solana program close`.
+=======================================================================
+Error: Account 2Egb5MVzMWT7diUZRXEw59ygbU63s5odWpNDA1y7Q1Kt has insufficient funds for spend (1.88235288 SOL) + fee (0.00136 SOL)
+There was a problem deploying: Output { status: ExitStatus(ExitStatus(256)), stdout: "", stderr: "" }.
+
+=======================================================================================
+=======================================================================================
