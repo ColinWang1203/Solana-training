@@ -1,14 +1,149 @@
 =======================================================================================
-Issue 2: (20220131)
-
+Issue 3: (20220201)
+after anchor deploy success, anchor test shows that program doest not exist
 =======================================================================================
 Steps to reproduce:
 anchor deploy
+anchor test --skip-build --skip-deploy
 =======================================================================================
 Solution:
 
 =======================================================================================
 Suscess log snippet:
+
+=======================================================================================
+Full issue error log:
+
+colin@mgs:~/Desktop/self/SOL/Solana-training/2_anchor-escrow$ anchor deploy
+Deploying workspace: https://api.testnet.solana.com
+Upgrade authority: /home/colin/.config/solana/id.json
+Deploying program "anchor-escrow"...
+Program path: /home/colin/Desktop/self/SOL/Solana-training/2_anchor-escrow/target/deploy/anchor_escrow.so...
+Program Id: BxVfJbZqqeWU5q7ZNSKNMTyRueeE9SWqXno4euAvF9QX
+
+Deploy success
+colin@mgs:~/Desktop/self/SOL/Solana-training/2_anchor-escrow$ anchor test --skip-build --skip-deploy
+yarn run v1.22.17
+warning package.json: No license field
+$ /home/colin/Desktop/self/SOL/Solana-training/2_anchor-escrow/node_modules/.bin/ts-mocha -p ./tsconfig.json -t 1000000 'tests/**/*.ts'
+
+
+  anchor-escrow
+    ✔ Initialize program state (5404ms)
+Transaction simulation failed: Attempt to load a program that does not exist
+
+Translating error SendTransactionError: failed to send transaction: Transaction simulation failed: Attempt to load a program that does not exist
+    at Connection.sendEncodedTransaction (/home/colin/Desktop/self/SOL/Solana-training/2_anchor-escrow/node_modules/@solana/web3.js/src/connection.ts:3689:13)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at Connection.sendRawTransaction (/home/colin/Desktop/self/SOL/Solana-training/2_anchor-escrow/node_modules/@solana/web3.js/src/connection.ts:3649:20)
+    at sendAndConfirmRawTransaction (/home/colin/Desktop/self/SOL/Solana-training/2_anchor-escrow/node_modules/@solana/web3.js/src/util/send-and-confirm-raw-transaction.ts:27:21)
+    at Provider.send (/home/colin/Desktop/self/SOL/Solana-training/2_anchor-escrow/node_modules/@project-serum/anchor/src/provider.ts:114:18)
+    at Object.rpc [as initialize] (/home/colin/Desktop/self/SOL/Solana-training/2_anchor-escrow/node_modules/@project-serum/anchor/src/program/namespace/rpc.ts:24:23) {
+  logs: []
+}
+    1) Initialize escrow
+Transaction simulation failed: Attempt to load a program that does not exist
+
+Translating error SendTransactionError: failed to send transaction: Transaction simulation failed: Attempt to load a program that does not exist
+    at Connection.sendEncodedTransaction (/home/colin/Desktop/self/SOL/Solana-training/2_anchor-escrow/node_modules/@solana/web3.js/src/connection.ts:3689:13)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at Connection.sendRawTransaction (/home/colin/Desktop/self/SOL/Solana-training/2_anchor-escrow/node_modules/@solana/web3.js/src/connection.ts:3649:20)
+    at sendAndConfirmRawTransaction (/home/colin/Desktop/self/SOL/Solana-training/2_anchor-escrow/node_modules/@solana/web3.js/src/util/send-and-confirm-raw-transaction.ts:27:21)
+    at Provider.send (/home/colin/Desktop/self/SOL/Solana-training/2_anchor-escrow/node_modules/@project-serum/anchor/src/provider.ts:114:18)
+    at Object.rpc [as exchange] (/home/colin/Desktop/self/SOL/Solana-training/2_anchor-escrow/node_modules/@project-serum/anchor/src/program/namespace/rpc.ts:24:23) {
+  logs: []
+}
+    2) Exchange escrow state
+Transaction simulation failed: Attempt to load a program that does not exist
+
+Translating error SendTransactionError: failed to send transaction: Transaction simulation failed: Attempt to load a program that does not exist
+    at Connection.sendEncodedTransaction (/home/colin/Desktop/self/SOL/Solana-training/2_anchor-escrow/node_modules/@solana/web3.js/src/connection.ts:3689:13)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at Connection.sendRawTransaction (/home/colin/Desktop/self/SOL/Solana-training/2_anchor-escrow/node_modules/@solana/web3.js/src/connection.ts:3649:20)
+    at sendAndConfirmRawTransaction (/home/colin/Desktop/self/SOL/Solana-training/2_anchor-escrow/node_modules/@solana/web3.js/src/util/send-and-confirm-raw-transaction.ts:27:21)
+    at Provider.send (/home/colin/Desktop/self/SOL/Solana-training/2_anchor-escrow/node_modules/@project-serum/anchor/src/provider.ts:114:18)
+    at Object.rpc [as initialize] (/home/colin/Desktop/self/SOL/Solana-training/2_anchor-escrow/node_modules/@project-serum/anchor/src/program/namespace/rpc.ts:24:23) {
+  logs: []
+}
+    3) Initialize escrow and cancel escrow
+
+
+  1 passing (7s)
+  3 failing
+
+  1) anchor-escrow
+       Initialize escrow:
+     Error: failed to send transaction: Transaction simulation failed: Attempt to load a program that does not exist
+      at Connection.sendEncodedTransaction (node_modules/@solana/web3.js/src/connection.ts:3689:13)
+      at processTicksAndRejections (node:internal/process/task_queues:96:5)
+      at Connection.sendRawTransaction (node_modules/@solana/web3.js/src/connection.ts:3649:20)
+      at sendAndConfirmRawTransaction (node_modules/@solana/web3.js/src/util/send-and-confirm-raw-transaction.ts:27:21)
+      at Provider.send (node_modules/@project-serum/anchor/src/provider.ts:114:18)
+      at Object.rpc [as initialize] (node_modules/@project-serum/anchor/src/program/namespace/rpc.ts:24:23)
+
+  2) anchor-escrow
+       Exchange escrow state:
+     Error: failed to send transaction: Transaction simulation failed: Attempt to load a program that does not exist
+      at Connection.sendEncodedTransaction (node_modules/@solana/web3.js/src/connection.ts:3689:13)
+      at processTicksAndRejections (node:internal/process/task_queues:96:5)
+      at Connection.sendRawTransaction (node_modules/@solana/web3.js/src/connection.ts:3649:20)
+      at sendAndConfirmRawTransaction (node_modules/@solana/web3.js/src/util/send-and-confirm-raw-transaction.ts:27:21)
+      at Provider.send (node_modules/@project-serum/anchor/src/provider.ts:114:18)
+      at Object.rpc [as exchange] (node_modules/@project-serum/anchor/src/program/namespace/rpc.ts:24:23)
+
+  3) anchor-escrow
+       Initialize escrow and cancel escrow:
+     Error: failed to send transaction: Transaction simulation failed: Attempt to load a program that does not exist
+      at Connection.sendEncodedTransaction (node_modules/@solana/web3.js/src/connection.ts:3689:13)
+      at processTicksAndRejections (node:internal/process/task_queues:96:5)
+      at Connection.sendRawTransaction (node_modules/@solana/web3.js/src/connection.ts:3649:20)
+      at sendAndConfirmRawTransaction (node_modules/@solana/web3.js/src/util/send-and-confirm-raw-transaction.ts:27:21)
+      at Provider.send (node_modules/@project-serum/anchor/src/provider.ts:114:18)
+      at Object.rpc [as initialize] (node_modules/@project-serum/anchor/src/program/namespace/rpc.ts:24:23)
+
+
+
+error Command failed with exit code 3.
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+=======================================================================================
+=======================================================================================
+=======================================================================================
+Issue 2: (20220131)
+Pubsub error
+=======================================================================================
+Steps to reproduce:
+anchor deploy
+=======================================================================================
+Solution:
+solana config set --url https://rpc-mainnet-fork.dappio.xyz
+solana config set --ws wss://rpc-mainnet-fork.dappio.xyz/ws      #<< this one is missing
+ws rpc has been modified
+=======================================================================================
+Suscess log snippet: (failed)
+
+colin@mgs:~/Desktop/self/SOL/Solana-training/2_anchor-escrow$ anchor deploy
+Deploying workspace: https://rpc-mainnet-fork.dappio.xyz
+Upgrade authority: /home/colin/.config/solana/id.json
+Deploying program "anchor-escrow"...
+Program path: /home/colin/Desktop/self/SOL/Solana-training/2_anchor-escrow/target/deploy/anchor_escrow.so...
+Blockhash expired. 5 retries remaining
+Blockhash expired. 4 retries remaining
+Blockhash expired. 3 retries remaining
+Blockhash expired. 2 retries remaining
+Blockhash expired. 1 retries remaining
+======================================================================
+Recover the intermediate account's ephemeral keypair file with
+`solana-keygen recover` and the following 12-word seed phrase:
+======================================================================
+pond hint foil roast recipe barely already now razor brown reduce tide
+======================================================================
+To resume a deploy, pass the recovered keypair as the
+[BUFFER_SIGNER] to `solana program deploy` or `solana write-buffer'.
+Or to recover the account's lamports, pass it as the
+[BUFFER_ACCOUNT_ADDRESS] argument to `solana program close`.
+======================================================================
+Error: Data writes to account failed: Custom error: Max retries exceeded
+There was a problem deploying: Output { status: ExitStatus(ExitStatus(256)), stdout: "", stderr: "" }.
 
 =======================================================================================
 Full issue error log:
